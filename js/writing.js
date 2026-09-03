@@ -23,6 +23,25 @@ function speakSequence(items, gapMs, onDone) {
   next();
 }
 
+/* ---------------- Print / Save as PDF ---------------- */
+
+function printSheet(title, bodyHtml) {
+  const today = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  const sheet = document.getElementById('print-sheet');
+  sheet.innerHTML = `
+    <div class="print-sheet-inner">
+      <div class="print-sheet-brand">✨ Spark Station — Writing &amp; Phonics Practice</div>
+      <h2>${title}</h2>
+      <div class="print-meta">
+        <span>Name: ________________________</span>
+        <span>Date: ${today}</span>
+      </div>
+      ${bodyHtml}
+    </div>
+  `;
+  window.print();
+}
+
 /* ---------------- Tracing mode ---------------- */
 
 const tracing = {
@@ -48,6 +67,11 @@ function initTracing() {
   document.getElementById('trace-hear').addEventListener('click', () => {
     const item = tracing.set[tracing.index];
     speak(item.spokenName);
+  });
+  document.getElementById('trace-print').addEventListener('click', () => {
+    const label = document.getElementById('trace-current-label').textContent;
+    const dataUrl = tracing.canvas.toDataURL('image/png');
+    printSheet(label, `<div class="print-sheet-image-wrap"><img src="${dataUrl}" alt="${label}" /></div>`);
   });
 
   document.querySelectorAll('.color-swatch').forEach(btn => {
@@ -171,6 +195,11 @@ function initPhonics() {
     speak(phonics.currentWord.word, 0.85);
   });
 
+  document.getElementById('phonics-print').addEventListener('click', () => {
+    const word = phonics.currentWord.word;
+    printSheet(`I can spell "${word}"!`, `<div class="print-word-display">${word.toUpperCase()}</div>`);
+  });
+
   buildWordList();
   pickRandomWord();
 }
@@ -215,6 +244,7 @@ function renderPhonicsWord() {
 
   document.getElementById('phonics-write-btn').onclick = () => loadWordIntoTracing(word);
   document.getElementById('phonics-celebrate').hidden = true;
+  document.getElementById('phonics-done-actions').hidden = true;
 }
 
 function shuffleLetters(arr) {
@@ -247,6 +277,7 @@ function handleTileTap(tile) {
       setTimeout(() => {
         speak(word, 0.85);
         document.getElementById('phonics-celebrate').hidden = false;
+        document.getElementById('phonics-done-actions').hidden = false;
       }, 300);
     }
   } else {

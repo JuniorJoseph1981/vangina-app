@@ -472,7 +472,6 @@ body.modal-open { overflow: hidden; }
     height: auto;
     position: static;
   }
-  .plan-header h2::before { content: "Weekly Activity Plan — "; }
   .plan-item { break-inside: avoid; border: 1px solid #ccc; background: #fff; }
 }
 
@@ -684,4 +683,54 @@ body.modal-open { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   .phonics-tile.shake { animation: none; }
+}
+
+.phonics-done-actions[hidden] { display: none; }
+.phonics-done-actions { text-align: center; margin-bottom: 1rem; }
+
+.btn-print { width: 100%; }
+.print-hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin: 0.4rem 0 0;
+}
+
+/* ---- Printable work sheet (Writing & Phonics) ---- */
+
+.print-sheet { display: none; }
+
+.print-sheet-inner { padding: 1rem; color: #1a1a1a; }
+.print-sheet-brand { font-size: 0.95rem; font-weight: 700; color: #444; }
+.print-sheet-inner h2 { font-size: 1.6rem; margin: 0.4rem 0 1.2rem; }
+.print-meta {
+  display: flex;
+  gap: 2.5rem;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #ccc;
+}
+.print-sheet-image-wrap { text-align: center; }
+.print-sheet-image-wrap img {
+  max-width: 100%;
+  width: 420px;
+  border: 2px solid #333;
+  border-radius: 12px;
+}
+.print-word-display {
+  text-align: center;
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  border: 3px solid #333;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+@media print {
+  body.writing-page > *:not(#print-sheet) { display: none !important; }
+  body.writing-page #print-sheet { display: block !important; }
 }

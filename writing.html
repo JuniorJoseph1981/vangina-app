@@ -67,6 +67,8 @@
             <button type="button" id="trace-next" class="btn btn-secondary">Next ⟶</button>
           </div>
           <button type="button" id="trace-clear" class="btn btn-text-wide">Clear My Writing</button>
+          <button type="button" id="trace-print" class="btn btn-primary btn-print">🖨️ Print / Save as PDF</button>
+          <p class="print-hint">Opens the print dialog — choose "Save as PDF" as the printer to save a copy.</p>
         </div>
 
         <div class="trace-canvas-wrap">
@@ -98,6 +100,11 @@
 
         <div id="phonics-tiles" class="phonics-tiles"></div>
 
+        <div id="phonics-done-actions" class="phonics-done-actions" hidden>
+          <button type="button" id="phonics-print" class="btn btn-primary btn-print">🖨️ Print / Save as PDF</button>
+          <p class="print-hint">Opens the print dialog — choose "Save as PDF" as the printer to save a copy.</p>
+        </div>
+
         <button type="button" id="phonics-write-btn" class="btn btn-text-wide">✏️ Practice Writing This Word</button>
       </div>
     </section>
@@ -106,6 +113,8 @@
   <footer class="site-footer">
     <p>Sounds are played using this device's built-in text-to-speech — quality varies by browser and device. Always supervise practice and adapt to each child's needs.</p>
   </footer>
+
+  <div id="print-sheet" class="print-sheet" aria-hidden="true"></div>
 
   <script src="js/writing-data.js"></script>
   <script src="js/writing.js"></script>
