@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spark Station — Writing &amp; Phonics</title>
+  <meta name="description" content="Letter and number formation tracing, plus phonics sound-out and spelling practice for early learners." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="writing-page">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-emoji" aria-hidden="true">✨</span>
+        <div>
+          <h1>Spark Station</h1>
+          <p class="tagline">Letter &amp; number formation, phonics sounds, and spelling practice</p>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Site sections">
+        <a href="index.html" class="nav-link">🎯 Activity Generator</a>
+        <a href="writing.html" class="nav-link active">✍️ Writing &amp; Phonics</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="writing-main">
+
+    <p id="speech-notice" class="speech-notice" hidden>
+      🔈 This browser doesn't support spoken sounds — tracing and spelling still work, just without audio.
+    </p>
+
+    <div class="mode-tabs" role="tablist" aria-label="Writing practice mode">
+      <button type="button" class="mode-tab active" data-tab="trace" role="tab">✏️ Letter &amp; Number Formation</button>
+      <button type="button" class="mode-tab" data-tab="phonics" role="tab">🔤 Phonics &amp; Spelling</button>
+    </div>
+
+    <section id="panel-trace" class="mode-panel" role="tabpanel">
+      <div class="trace-layout">
+        <div class="trace-controls">
+          <div class="control-group">
+            <h2 class="control-label">Character Set</h2>
+            <div class="toggle-group">
+              <button type="button" id="trace-set-upper" class="toggle-btn trace-set-btn active">ABC</button>
+              <button type="button" id="trace-set-lower" class="toggle-btn trace-set-btn">abc</button>
+              <button type="button" id="trace-set-numbers" class="toggle-btn trace-set-btn">123</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h2 class="control-label">Ink Color</h2>
+            <div class="color-swatches">
+              <button type="button" class="color-swatch active" data-color="#3E7C82" style="--sw-color:#3E7C82" aria-label="Teal"></button>
+              <button type="button" class="color-swatch" data-color="#C97B4A" style="--sw-color:#C97B4A" aria-label="Orange"></button>
+              <button type="button" class="color-swatch" data-color="#8E5B8C" style="--sw-color:#8E5B8C" aria-label="Purple"></button>
+              <button type="button" class="color-swatch" data-color="#4C7A3F" style="--sw-color:#4C7A3F" aria-label="Green"></button>
+              <button type="button" class="color-swatch" data-color="#B05A6B" style="--sw-color:#B05A6B" aria-label="Pink"></button>
+            </div>
+          </div>
+
+          <p id="trace-current-label" class="trace-current-label">Letter: A</p>
+
+          <div class="trace-action-row">
+            <button type="button" id="trace-prev" class="btn btn-secondary">⟵ Prev</button>
+            <button type="button" id="trace-hear" class="btn btn-primary">🔊 Hear It</button>
+            <button type="button" id="trace-next" class="btn btn-secondary">Next ⟶</button>
+          </div>
+          <button type="button" id="trace-clear" class="btn btn-text-wide">Clear My Writing</button>
+        </div>
+
+        <div class="trace-canvas-wrap">
+          <canvas id="trace-canvas" width="600" height="600"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-phonics" class="mode-panel" role="tabpanel" hidden>
+      <div class="phonics-layout">
+        <div class="control-group">
+          <h2 class="control-label">Age Band</h2>
+          <div id="phonics-age-toggle" class="toggle-group">
+            <button type="button" class="toggle-btn active" data-age="3-5">3–5 yrs</button>
+            <button type="button" class="toggle-btn" data-age="5-7">5–7 yrs</button>
+            <button type="button" class="toggle-btn" data-age="7-9">7–9 yrs</button>
+          </div>
+        </div>
+
+        <div class="phonics-word-actions">
+          <button type="button" id="phonics-hear-word" class="btn btn-secondary">🔊 Hear Word</button>
+          <button type="button" id="phonics-sound-out" class="btn btn-primary">🗣️ Sound It Out</button>
+          <button type="button" id="phonics-new-word" class="btn btn-secondary">🔁 New Word</button>
+        </div>
+
+        <div id="phonics-blanks" class="phonics-blanks"></div>
+
+        <p id="phonics-celebrate" class="phonics-celebrate" hidden>🎉 Great spelling!</p>
+
+        <div id="phonics-tiles" class="phonics-tiles"></div>
+
+        <button type="button" id="phonics-write-btn" class="btn btn-text-wide">✏️ Practice Writing This Word</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sounds are played using this device's built-in text-to-speech — quality varies by browser and device. Always supervise practice and adapt to each child's needs.</p>
+  </footer>
+
+  <script src="js/writing-data.js"></script>
+  <script src="js/writing.js"></script>
+</body>
+</html>

@@ -64,7 +64,30 @@ h1, h2, h3, h4 { margin: 0 0 0.4em; line-height: 1.25; }
   padding: 1.5rem 1.5rem;
 }
 
-.header-inner { max-width: 1200px; margin: 0 auto; }
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.site-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.nav-link {
+  color: var(--primary-contrast);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+.nav-link:hover { background: rgba(255, 255, 255, 0.22); }
+.nav-link.active { background: rgba(255, 255, 255, 0.9); color: var(--primary-dark); }
 
 .brand { display: flex; align-items: center; gap: 0.9rem; }
 .brand-emoji { font-size: 2.2rem; }
@@ -451,4 +474,214 @@ body.modal-open { overflow: hidden; }
   }
   .plan-header h2::before { content: "Weekly Activity Plan — "; }
   .plan-item { break-inside: avoid; border: 1px solid #ccc; background: #fff; }
+}
+
+/* ==================== Writing & Phonics page ==================== */
+
+.writing-page { display: block; }
+
+.writing-main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.speech-notice {
+  background: #FDF3E3;
+  border: 1px solid #F1D9A8;
+  color: #8A5A12;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  margin: 0 0 1rem;
+}
+
+.mode-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.mode-tab {
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.mode-tab.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+.mode-panel[hidden] { display: none; }
+
+.btn-text-wide {
+  background: transparent;
+  color: var(--primary-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.75rem;
+}
+.btn-text-wide:hover { color: var(--danger); }
+
+/* ---- Tracing ---- */
+
+.trace-layout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 750px) {
+  .trace-layout { grid-template-columns: 1fr; }
+}
+
+.trace-controls { display: flex; flex-direction: column; }
+
+.color-swatches { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.color-swatch {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background: var(--sw-color);
+  cursor: pointer;
+  padding: 0;
+}
+.color-swatch.active { border-color: var(--ink); }
+
+.trace-current-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 1rem 0 0.75rem;
+}
+
+.trace-action-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.trace-action-row .btn { flex: 1; padding-left: 0.5rem; padding-right: 0.5rem; }
+
+.trace-canvas-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--surface-alt);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+}
+
+#trace-canvas {
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 1 / 1;
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border);
+  cursor: crosshair;
+  touch-action: none;
+}
+
+/* ---- Phonics & Spelling ---- */
+
+.phonics-layout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.phonics-word-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 1.5rem;
+}
+.phonics-word-actions .btn { flex: 1; min-width: 140px; }
+
+.phonics-blanks {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.phonics-blank {
+  width: 56px;
+  height: 64px;
+  border-bottom: 4px solid var(--primary);
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm) var(--radius-sm) 4px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+.phonics-blank.filled { background: #E4F1E0; border-color: #4C7A3F; }
+
+.phonics-celebrate {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2F5A28;
+  margin-bottom: 1.25rem;
+}
+
+.phonics-tiles {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.phonics-tile {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--accent);
+  background: #FDF3E3;
+  color: #8A5A12;
+  font-size: 1.6rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+.phonics-tile:hover:not(:disabled) { transform: translateY(-2px); }
+.phonics-tile:disabled,
+.phonics-tile.used {
+  opacity: 0;
+  pointer-events: none;
+}
+.phonics-tile.shake {
+  animation: tile-shake 0.4s ease;
+  background: #FBE4E1;
+  border-color: var(--danger);
+}
+
+@keyframes tile-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phonics-tile.shake { animation: none; }
 }

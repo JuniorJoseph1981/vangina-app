@@ -23,9 +23,21 @@ No install, no build, no account. It's plain HTML/CSS/JS.
 
 All activity content lives in `js/activities-data.js` as plain JavaScript objects — no build step needed. Copy an existing entry to add a new one; the fields are: `title`, `category`, `ages`, `duration`, `dexterityFriendly`, `benefits`, `materials`, `setup`, `steps`, `safety`, `attentionTips`, `dexterityNotes`.
 
+## Writing & Phonics page
+
+A second page (`writing.html`, linked from the header nav) for letter/number formation and phonics/spelling practice:
+
+- **Letter & Number Formation** — a tracing canvas with a big pale guide character (uppercase, lowercase, or 0–9) that the child draws over with mouse, trackpad, or finger. Pick an ink color, hear the letter/number name spoken aloud, and step through the set with Prev/Next.
+- **Phonics & Spelling** — pick an age band to get an age-appropriate word (simple 3-letter words for 3–5, blends for 5–7, longer words for 7–9). "Sound It Out" speaks each letter's sound in sequence then the whole word; tapping letter tiles in order spells the word into blanks, with a sound and a small celebration on success. "Practice Writing This Word" sends the word straight into the tracing canvas.
+
+Sounds use the browser's built-in text-to-speech (`speechSynthesis`) — no API, no cost, works offline once the page has loaded. Quality depends on the device's installed voices; if a browser has none, the page shows a notice and everything else still works visually.
+
 ## Files
 
-- `index.html` — page structure
-- `css/styles.css` — styling, including a print stylesheet for the weekly plan
+- `index.html` — activity generator page structure
+- `writing.html` — writing & phonics practice page structure
+- `css/styles.css` — shared styling for both pages, including a print stylesheet for the weekly plan
 - `js/activities-data.js` — the activity library (edit this to add/change activities)
-- `js/app.js` — filtering, generation, and weekly plan logic
+- `js/app.js` — activity filtering, generation, and weekly plan logic
+- `js/writing-data.js` — letter/number sets, phonics sound mappings, and the phonics word list (edit this to add words)
+- `js/writing.js` — tracing canvas and phonics/spelling interaction logic
