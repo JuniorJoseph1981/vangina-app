@@ -46,6 +46,7 @@ function cacheEls() {
   els.modalBackdrop = $('modal-backdrop');
   els.modalBody = $('modal-body');
   els.modalClose = $('modal-close');
+  els.printSheet = $('print-sheet');
 }
 
 function buildAgeToggle() {
@@ -150,7 +151,7 @@ function bindEvents() {
     generateBatch();
   });
   els.generateBtn.addEventListener('click', () => generateBatch());
-  els.printPlanBtn.addEventListener('click', () => window.print());
+  els.printPlanBtn.addEventListener('click', printWeeklyPlan);
   els.clearPlanBtn.addEventListener('click', () => {
     if (state.plan.length === 0) return;
     if (confirm('Clear all activities from the weekly plan?')) {
@@ -348,9 +349,36 @@ function renderPlan() {
   });
 }
 
-function openModal(activity) {
-  const cat = categoryMeta(activity.category);
-  els.modalBody.innerHTML = `
+function printWeeklyPlan() {
+  const activities = state.plan.map(id => ACTIVITIES.find(a => a.id === id)).filter(Boolean);
+  if (activities.length === 0) return;
+
+  const today = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  const activitiesHtml = activities.map(activity => {
+    const cat = categoryMeta(activity.category);
+    return `
+      <div class="print-activity">
+        ${activityHeaderHtml(activity, cat)}
+        ${activityDetailBodyHtml(activity)}
+      </div>
+    `;
+  }).join('');
+
+  els.printSheet.innerHTML = `
+    <div class="print-sheet-inner modal-body">
+      <div class="print-sheet-brand">✨ Spark Station — Weekly Activity Plan</div>
+      <div class="print-meta">
+        <span>Teacher: ________________________</span>
+        <span>Week of: ${today}</span>
+      </div>
+      ${activitiesHtml}
+    </div>
+  `;
+  window.print();
+}
+
+function activityHeaderHtml(activity, cat) {
+  return `
     <span class="modal-category" style="--card-color:${cat.color}">${cat.emoji} ${cat.label}</span>
     <h2>${activity.title}</h2>
     <div class="card-badges">
@@ -358,7 +386,11 @@ function openModal(activity) {
       <span class="badge">👤 Ages ${activity.ages.join(', ')}</span>
       ${activity.dexterityFriendly ? '<span class="badge badge-dex">🖐 Low-dexterity friendly</span>' : ''}
     </div>
+  `;
+}
 
+function activityDetailBodyHtml(activity) {
+  return `
     <h4>Skills this builds</h4>
     <ul class="benefits-list">${activity.benefits.map(id => {
       const b = benefitMeta(id);
@@ -381,7 +413,14 @@ function openModal(activity) {
     <ul class="tips-list">${activity.attentionTips.map(t => `<li>${t}</li>`).join('')}</ul>
 
     ${activity.dexterityNotes ? `<h4>Dexterity adaptation</h4><p>${activity.dexterityNotes}</p>` : ''}
+  `;
+}
 
+function openModal(activity) {
+  const cat = categoryMeta(activity.category);
+  els.modalBody.innerHTML = `
+    ${activityHeaderHtml(activity, cat)}
+    ${activityDetailBodyHtml(activity)}
     <div class="modal-actions">
       <button type="button" class="btn ${state.plan.includes(activity.id) ? 'btn-added' : 'btn-primary'}" id="modal-add-btn">
         ${state.plan.includes(activity.id) ? '✓ In Weekly Plan' : '+ Add to Weekly Plan'}

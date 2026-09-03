@@ -459,21 +459,14 @@ body.modal-open { overflow: hidden; }
   * { transition: none !important; animation: none !important; }
 }
 
-/* ---------- Print (Weekly Plan) ---------- */
-@media print {
-  .site-header, .app-main, .site-footer, .plan-actions, .plan-remove-btn, #modal-backdrop {
-    display: none !important;
-  }
-  body { display: block; background: #fff; }
-  .plan-drawer {
-    display: block;
-    border: none;
-    padding: 0;
-    height: auto;
-    position: static;
-  }
-  .plan-item { break-inside: avoid; border: 1px solid #ccc; background: #fff; }
+/* ---------- Print (Weekly Plan — full activity details) ---------- */
+.print-activity {
+  break-inside: avoid;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #ccc;
 }
+.print-activity:last-child { border-bottom: none; }
 
 /* ==================== Writing & Phonics page ==================== */
 
@@ -731,6 +724,6 @@ body.modal-open { overflow: hidden; }
 }
 
 @media print {
-  body.writing-page > *:not(#print-sheet) { display: none !important; }
-  body.writing-page #print-sheet { display: block !important; }
+  body > *:not(#print-sheet) { display: none !important; }
+  #print-sheet { display: block !important; }
 }
