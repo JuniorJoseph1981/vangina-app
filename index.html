@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spark Station — Activity Generator</title>
+  <meta name="description" content="Generate safe, age-banded activities and science mini-experiments for special-needs and ADHD classrooms, then build a printable weekly plan." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-emoji" aria-hidden="true">✨</span>
+        <div>
+          <h1>Spark Station</h1>
+          <p class="tagline">Safe, hands-on activity ideas for special-needs &amp; ADHD classrooms</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <section class="controls-panel" aria-label="Filters">
+      <div class="control-group">
+        <h2 class="control-label">Age Band</h2>
+        <div id="age-toggle" class="toggle-group" role="group" aria-label="Age band"></div>
+      </div>
+
+      <div class="control-group">
+        <h2 class="control-label">Activity Type</h2>
+        <div id="category-chips" class="chip-group" role="group" aria-label="Activity category"></div>
+      </div>
+
+      <div class="control-group">
+        <h2 class="control-label">Skill Focus <span class="control-sublabel">(what should this task build?)</span></h2>
+        <div id="benefit-chips" class="chip-group" role="group" aria-label="Skill focus"></div>
+      </div>
+
+      <div class="control-group control-row">
+        <div>
+          <label class="control-label" for="duration-select">Max Duration</label>
+          <select id="duration-select" class="select-input">
+            <option value="">Any length</option>
+            <option value="10">10 min or less</option>
+            <option value="15">15 min or less</option>
+            <option value="20">20 min or less</option>
+            <option value="30">30 min or less</option>
+          </select>
+        </div>
+        <div class="dexterity-field">
+          <label class="checkbox-label">
+            <input type="checkbox" id="dexterity-toggle" />
+            <span>🖐 Low-dexterity friendly only</span>
+          </label>
+        </div>
+      </div>
+
+      <button type="button" id="generate-btn" class="btn btn-generate">
+        <span aria-hidden="true">🎲</span> Generate Activities
+      </button>
+    </section>
+
+    <section class="results-section" aria-label="Generated activities">
+      <div id="results-grid" class="results-grid"></div>
+      <p id="empty-state" class="empty-state" hidden>
+        No activities match those filters yet — try widening the age band, activity type, or duration.
+      </p>
+    </section>
+  </main>
+
+  <aside class="plan-drawer" aria-label="Weekly plan">
+    <div class="plan-header">
+      <h2>Weekly Plan <span id="plan-count" class="plan-count-badge">0</span></h2>
+    </div>
+    <ul id="plan-list" class="plan-list"></ul>
+    <div class="plan-actions">
+      <button type="button" id="print-plan-btn" class="btn btn-secondary" disabled>🖨️ Print Plan</button>
+      <button type="button" id="clear-plan-btn" class="btn btn-text" disabled>Clear all</button>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <p>Always supervise activities and adapt materials to each child's needs, allergies, and sensory profile. Nothing here replaces guidance from an occupational therapist, behavioral specialist, or the child's IEP team.</p>
+  </footer>
+
+  <div id="modal-backdrop" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button type="button" id="modal-close" class="modal-close" aria-label="Close details">✕</button>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="js/activities-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
